@@ -45,10 +45,11 @@ namespace LibraryManagementSystemEF
                 borrowBook.Issued_date = dtp_borrow.Value;
                 borrowBook.UserID = Globals.userID;
                 borrowBook.Return_date = dtp_return.Value;
+                borrowBook.Status = 1;
                 db.TBL_Borrowed.Add(borrowBook);
 
                 db.SaveChanges();
-                dataGridView1.DataSource = db.TBL_Borrowed.ToList();
+                dataGridView1.DataSource = db.TBL_Borrowed.Where(b => b.UserID == borrowBook.UserID).ToList();
             }
             else
             {
